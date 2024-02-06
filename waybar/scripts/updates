@@ -1,0 +1,14 @@
+#!/bin/bash
+
+IFS=$'\n'
+
+zypper lu > /tmp/updates.txt
+
+NO_UPDATES=`cat /tmp/updates.txt | grep "No se ha encontrado ninguna actualización." | wc -l`
+UPDATES=`cat /tmp/updates.txt | grep -e '^v' | wc -l`
+
+if [[ $NO_UPDATES == "1" ]]; then
+  echo "0"
+else
+  echo "$UPDATES"
+fi

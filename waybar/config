@@ -1,0 +1,166 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 35,
+    "spacing": 0,
+    "margin-top": 0,
+    "margin-bottom": 0,
+    "workspace_buttons": "no",
+
+    "modules-left":[  
+                    "custom/launcher", 
+                    "wlr/taskbar" 
+    ],
+    "modules-center": [ 
+                    "tray", 
+                    "custom/updater", 
+    ],
+    "modules-right":[
+                    "idle_inhibitor", 
+                    "custom/snip",
+                    "cpu", 
+                    "memory", 
+                    "temperature",
+                    "backlight", 
+                    "keyboard-state",  
+                    "disk", 
+                    "network", 
+                    "pulseaudio", 
+                    "clock",
+                    "custom/power"
+    ],
+
+   "keyboard-state": {
+        "numlock": false,
+        "capslock": true,
+        "format": "{icon}  {name}  ",
+        "format-icons": {
+            "locked": "",
+            "unlocked": ""
+        }
+   },
+
+   "wlr/taskbar": {
+        "format": "{icon}",
+        "icon-size": 20,
+        "icon-theme": "Star",
+        "tooltip-format": "{title}",
+        "on-click": "activate",
+        "on-click-middle": "close",
+   },
+
+   "hyprland/language": {
+      "format": "{}+",
+      "format-es": "🇪🇸",
+      "format-us": "🇺🇸",
+   },
+
+   "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+   },
+
+   "tray": {
+        "icon-size": 20,
+        "spacing": 10
+   },
+
+   "clock": {
+        "tooltip-format": "<big>{:%A,%d}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%d/%m/%d}"
+   },
+
+   "cpu": {
+        "format": "{usage}% ",
+        "tooltip": false
+   },
+
+   "memory": {
+        "format": "{}% "
+   },
+
+   "temperature": {
+        "critical-threshold": 70,
+        "format": "{temperatureC}°C {icon}",
+        "format-icons": ["", "", ""]
+   },
+
+   "backlight": {
+        "format": "{percent}% {icon}",
+        "format-icons": ["", ""]
+   },
+
+   "network": {
+        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-ethernet": "Connected  ",
+        "tooltip-format": "{ifname} via {gwaddr} ",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "Disconnected ⚠",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}",
+        "on-click-right": "alacritty -e nmtui"
+   },
+
+   "pulseaudio": {
+        "format": "{volume}% {icon}",
+        "format-bluetooth": "{volume}% {icon}",
+        "format-bluetooth-muted": "{icon} {format_source}",
+        "format-muted": "0% {format_source}",
+        "format-source": "",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+   },
+
+   "custom/media": {
+        "format": "{icon} {}",
+        "return-type": "json",
+        "max-length": 15,
+        "format-icons": {
+            "spotify": " ",
+            "default": " "
+        },
+        "escape": true,
+        "exec": "$HOME/.config/system_scripts/mediaplayer.py 2> /dev/null",
+        "on-click": "playerctl play-pause"
+   },
+
+   "custom/launcher":{
+        "format": "",
+        "on-click": "ulauncher-toggle",
+   },
+
+   "custom/power":{
+        "format": " ",
+        "on-click": "nwg-bar",
+   },
+
+   "custom/updater":{
+        "format": "  {} Updates",
+        "exec": "~/.config/waybar/scripts/updates",
+        "exec-if": "[[ $(~/.config/waybar/scripts/updates) != 0 ]]",
+        "interval": 60,
+        "on-click": "alacritty -e sudo ~/.config/waybar/scripts/update"
+   },
+
+   "custom/snip":{
+        "format": " ",
+        "on-click": "grimshot --notify save screen $HOME/Imágenes/$(zenity --entry --text 'Set filename:' --entry-text '.png' && sleep 2)",
+        "on-click-right": "grimshot --notify copy area"
+   },
+
+   "disk": {
+  	    "interval": 30,
+  	    "format": "{free} avail ({percentage_free}%) ",
+   }
+}

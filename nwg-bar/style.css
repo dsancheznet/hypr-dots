@@ -1,0 +1,35 @@
+window {
+        background-color: rgba (46, 46, 46, 0)
+}
+
+/* Outer bar container, takes all the window width/height */
+#outer-box {
+	margin: 0px
+}
+
+/* Inner bar container, surrounds buttons */
+#inner-box {
+	background-color: rgba ( 65, 65, 65, 0.75 );
+	border-radius: 10px;
+  border: 2px solid #FF6550;
+	padding: 5px;
+	margin: 5px
+}
+
+button, image {
+	background: none;
+	border: none;
+	box-shadow: none
+}
+
+button {
+	padding-left: 10px;
+	padding-right: 10px;
+	margin: 5px;
+  color: white; 
+  text-shadow: 2px 2px 0px black;
+}
+
+button:hover {
+	background-color: rgba (255, 255, 255, 0.1)
+}

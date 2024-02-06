@@ -1,0 +1,242 @@
+* {
+    border: none;
+    border-radius: 0px;
+    /* `otf-font-awesome` is required to be installed for icons */
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: transparent;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+#mode {
+    background-color: #64727D;
+    border-bottom: 3px solid #ffffff;
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#custom-media,
+#custom-launcher,
+#custom-power,
+#custom-layout,
+#custom-updater,
+#custom-snip,
+#taskbar,
+#tray,
+#mode,
+#idle_inhibitor,
+#language,
+#keyboard-state {
+    padding: 0 7px;
+    border-top: 2px solid #ff6550;
+    border-bottom: 2px solid #ff6550;
+    color: #ffffff;
+    background-color: rgba(46, 46, 46, 0.5);
+    /*border-image: linear-gradient(#f6b73c, #4d9f0c) 30;*/
+}
+
+#window,
+#workspaces {
+    margin: 0px 4px;
+}
+
+/* If workspaces is the leftmost module, omit left margin */
+.modules-left > widget:first-child > #workspaces {
+    margin-left: 0px;
+}
+
+/* If workspaces is the rightmost module, omit right margin */
+.modules-right > widget:last-child > #workspaces {
+    margin-right: 0px;
+}
+
+#clock {
+    font-size: 20px;
+    font-family: "Upheaval TT (BRK)"
+}
+
+#battery {
+    color: #000000;
+}
+
+#battery.charging, #battery.plugged {
+    background-color: #26A65B;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #000000;
+    }
+}
+
+#battery.critical:not(.charging) {
+    background-color: #f53c3c;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+label:focus {
+    background-color: #000000;
+}
+
+#network.disconnected {
+    color: red;
+}
+
+#pulseaudio.muted {
+    color: red;
+}
+
+#custom-media {
+    background-color: #8EC5FC;
+    background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
+    color: black;
+    border-radius: 20px;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+#custom-media.custom-spotify {
+    background-color: #8EC5FC;
+    background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
+    color: black;
+    border-radius: 20px;
+    margin-right: 5px;
+
+}
+
+#custom-media.custom-vlc {
+    background-color: #8EC5FC;
+    background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
+    color: black;
+    border-radius: 20px;
+    margin-right: 5px;
+}
+
+#custom-power{
+    font-size: 16px;
+    border-radius: 0px 20px 20px 0px;
+    /*margin-right: 2px;*/
+    padding-right: 10px;
+    border-right: 2px solid #ff6550;
+}
+
+#custom-launcher{
+    font-size: 14px;
+    border-radius: 20px 0px 0px 20px;
+    margin-left: 2px;
+    padding-left: 10px;
+    border-left: 2px solid #ff6550;
+}
+
+#custom-layout{
+    color: white;
+    font-size:20px;
+}
+
+#custom-updater {
+    color: white;
+    border-radius: 20px 20px 20px 20px;
+    border: 2px solid #ff6550;
+    margin-right: 40px;
+}
+
+#custom-snip {
+    /*color: white;
+    font-size: 20px;*/
+}
+
+#disk {
+    color: white;
+}
+
+#disk.warning {
+  color: yellow;
+}
+
+#taskbar{
+    border-radius: 0px 20px 20px 0px;
+    border-right: 2px solid #ff6550;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+#taskbar button {
+  background: rgba(0,0,0,0)
+}
+
+#taskbar button.active{
+  background: radial-gradient(circle, rgba(255,102,25,1) 20%, rgba(46,46,46,0) 70%);
+  /* Alternative gradients
+  background-color: rgba(255,125,0,0.15);
+  background: radial-gradient(circle, rgba(255,102,25,1) 10%, rgba(23,23,23,1) 65%); 
+  background: linear-gradient(180deg, rgba(23,23,23,1) 80%, rgba(255,102,25,1) 100%);
+  background: radial-gradient(circle, rgba(255,102,25,1) 20%, rgba(46,46,46,0) 70%);
+  box-shadow: 0px -2px 1px 0px white inset;*/
+}
+
+#taskbar button:hover {
+  background: radial-gradient(circle, rgba(255,255,255,1) 20%, rgba(0,0,0,0) 70%); 
+  box-shadow: none;
+}
+
+#temperature.critical {
+    background-color: #eb4d4b;
+}
+
+#tray {
+    border-radius: 20px 20px 20px 20px;
+    border: 2px solid #ff6550;
+    margin-right: 40px;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+}
+
+#idle_inhibitor {
+    border-radius: 20px 0px 0px 20px;
+    border-left: 2px solid #ff6550;
+    padding-left: 10px;
+}
+
+#idle_inhibitor.activated {
+    border-radius: 20px 0px 0px 20px;
+    border-left: 2px solid #ff6550;
+}
+
+#language {
+    min-width: 6px;
+}
+
+#keyboard-state {
+    min-width: 6px;
+}
+
+#keyboard-state > label.locked {
+    color: yellow;
+}
