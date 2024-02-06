@@ -1,4 +1,4 @@
-# hypr-dots
+# hypr-dots :octocat:
 Current versions of the dot files installed on my desktop
 
 ## Usage of the installer 
