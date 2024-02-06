@@ -24,17 +24,17 @@ while [ : ]; do
         echo "Syncing Repo..."
         shift
         # Copy waybar files
-        rsync -avhr ~/.config/waybar . --progress
+        rsync -avhr ~/.config/waybar . --progress --delete
         # Copy hyprland files
-        rsync -avhr ~/.config/hypr . --progress
+        rsync -avhr ~/.config/hypr . --progress --delete
         # Copy nwg-bar configuration
-        rsync -avhr ~/.config/nwg-bar . --progress
+        rsync -avhr ~/.config/nwg-bar . --progress --delete
         # Copy kitty configurations
-        rsync -avhr ~/.config/kitty . --progress
+        rsync -avhr ~/.config/kitty . --progress --delete
         # Copy fonts
-        rsync -avhr ~/.local/share/fonts . --progress
+        rsync -avhr ~/.local/share/fonts . --progress --delete
         # Copy images
-        rsync -avhr ~/Imágenes/System . --progress
+        rsync -avhr ~/Imágenes/System . --progress --delete
         # Add all new or changed files
         git add .
         # Commit all changes
