@@ -1,6 +1,0 @@
-#!/bin/bash
-
-/usr/bin/zypper up
-
-/usr/bin/zypper refresh
-

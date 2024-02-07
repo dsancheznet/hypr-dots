@@ -1,14 +1,26 @@
-#!/bin/bash
+#!/bin/env bash 
 
 IFS=$'\n'
 
-zypper lu > /tmp/updates.txt
 
-NO_UPDATES=`cat /tmp/updates.txt | grep "No se ha encontrado ninguna actualización." | wc -l`
-UPDATES=`cat /tmp/updates.txt | grep -e '^v' | wc -l`
-
-if [[ $NO_UPDATES == "1" ]]; then
-  echo "0"
-else
-  echo "$UPDATES"
-fi
+case "$1" in
+"list")
+    zypper lu > /tmp/updates.txt
+    
+    NO_UPDATES=`cat /tmp/updates.txt | grep "No se ha encontrado ninguna actualización." | wc -l`
+    UPDATES=`cat /tmp/updates.txt | grep -e '^v' | wc -l`
+    
+    if [[ $NO_UPDATES == "1" ]]; then
+      echo "0"
+    else
+      echo "$UPDATES"
+    fi
+    ;;
+"install")
+    /usr/bin/zypper dup
+    /usr/bin/zypper refresh
+    ;;
+*)
+  echo "Usage: updates [ install | list ] "
+  ;;
+esac

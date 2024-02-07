@@ -57,6 +57,18 @@ while [ : ]; do
         ;;
     -p | --prepare)
         echo "This option is not working yet. Coming soon ;)"
+        /*
+
+        echo "Installind 3rd party repos"
+        sudo zypper ar -f https://download.opensuse.org/repositories/home:/Dead_Mozay/openSUSE_Tumbleweed Dead_Mozay
+        echo "Refreshing repos"
+        sudo zypper refresh
+        echo "Update all packets"
+        sudo zypper update
+        echo "Install hyprland ulauncher"
+        sudo zypper install hyprland ulauncher 
+
+        */
         exit 0
         ;;
     --) shift; 
@@ -64,5 +76,5 @@ while [ : ]; do
         ;;
   esac
 done
-
-echo "Usage: install.sh [ -i,--install | -s,--sync | -p, --prepare ]"
+echo "Hyprland installer for OpenSuSE v0.1 Written by D.Sánchez (c)2024 "
+echo "Usage:    install.sh [ -i,--install | -s,--sync | -p, --prepare ]"

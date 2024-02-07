@@ -147,10 +147,10 @@
 
    "custom/updater":{
         "format": "  {} Updates",
-        "exec": "~/.config/waybar/scripts/updates",
-        "exec-if": "[[ $(~/.config/waybar/scripts/updates) != 0 ]]",
+        "exec": "~/.config/waybar/scripts/updates list",
+        "exec-if": "[[ $(~/.config/waybar/scripts/updates list) != 0 ]]",
         "interval": 60,
-        "on-click": "alacritty -e sudo ~/.config/waybar/scripts/update"
+        "on-click": "alacritty -e sudo ~/.config/waybar/scripts/updates install"
    },
 
    "custom/snip":{

@@ -1,0 +1,31 @@
+#!/bin/env bash
+
+case "$1" in
+"toggle")
+    DPMS_STATUS=`hyprctl monitors | grep "dpmsStatus" | cut -d":" -f2 | xargs`
+  
+    if [[ $DPMS_STATUS == "1" ]]; then
+      BRIGHTNESS_VALUE=`brightnessctl get`
+      echo "$BRIGHTNESS_VALUE" >> /tmp/SAVED_BRIGHTNESS
+      hyprctl dispatch dpms off
+    else
+      BRIGHTNESS_VALUE=`cat /tmp/SAVED_BRIGHTNESS`
+      hyprctl dispatch dpms on
+      brightnessctl set "$BRIGHTNESS_VALUE"
+    fi
+  ;;
+"on")
+    BRIGHTNESS_VALUE=`cat /tmp/SAVED_BRIGHTNESS`
+    hyprctl dispatch dpms on
+    brightnessctl set "$BRIGHTNESS_VALUE"
+  ;;
+"off")
+    BRIGHTNESS_VALUE=`brightnessctl get`
+    hyprctl dispatch dpms off
+    echo "$BRIGHTNESS_VALUE" >> /tmp/SAVED_BRIGHTNESS
+  ;;
+*)
+  echo "Usage: monitor \[ toggle | on | off \]"
+  ;;
+esac
+
