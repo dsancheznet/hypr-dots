@@ -4,7 +4,7 @@
 # Written by D.Sánchez 
 # usage: install.sh [ -s, --sync | -i, --install ]
 
-VALID_ARGS=$(getopt -o is --long install,sync -- "$@")
+VALID_ARGS=$(getopt -o isp --long install,sync,prepare -- "$@")
 if [[ $? -ne 0 ]]; then
     exit 1;
 fi
@@ -16,8 +16,20 @@ while [ : ]; do
     -i | --install)
         echo "Installing dotfiles..."
         shift
+        # Installing neovim conigurations
         git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 && nvim
-
+        # Installing waybar configurations
+        rsync -avhr ./waybar ~/.config/waybar --progress
+        # Installing hypr configurations
+        rsync -avhr ./hypr ~/.config/hypr --progress
+        # Installing nwg-bar configurations
+        rsync -avhr ./nwg-bar ~/.config/nwg-bar --progress
+        # Installing kitty configurations
+        rsync -avhr ./kitty ~/.config/kitty --progress
+        # Installing system fonts
+        rsync -avhr ./fonts ~/.local/share/fonts --progress
+        # Installing system images
+        rsync -avhr ./System ~/Imágenes/System --progress
         exit 0
         ;;
     -s | --sync)
@@ -43,10 +55,14 @@ while [ : ]; do
         git push
         exit 0
         ;;
+    -p | --prepare)
+        echo "This option is not working yet. Coming soon ;)"
+        exit 0
+        ;;
     --) shift; 
         break 
         ;;
   esac
 done
 
-echo "Usage: install.sh [ -i,--install | -s,--sync ]"
+echo "Usage: install.sh [ -i,--install | -s,--sync | -p, --prepare ]"
