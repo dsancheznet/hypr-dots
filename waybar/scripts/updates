@@ -1,7 +1,13 @@
 #!/bin/env bash 
 
-IFS=$'\n'
+# Installation control script written by D.Sánchez 2024
+# 
+# Usage: updates [ list | install ]
+#   list    : returns the amount of updates available to install
+#   install : install the pending updates as a distro update
+#             This option needs to be launched with sudo privileges
 
+IFS=$'\n'
 
 case "$1" in
 "list")
