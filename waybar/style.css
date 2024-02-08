@@ -31,6 +31,7 @@ window#waybar.hidden {
 #backlight,
 #network,
 #pulseaudio,
+#pulseaudio-slider,
 #custom-media,
 #custom-launcher,
 #custom-power,
@@ -105,6 +106,29 @@ label:focus {
 
 #pulseaudio.muted {
     color: red;
+}
+
+#pulseaudio-slider slider {
+    min-height: 0px;
+    min-width: 0px;
+    padding:10px;
+    opacity: 0;
+    background-image: none;
+    border: none;
+    box-shadow: none;
+}
+
+#pulseaudio-slider trough {
+    /*min-height: 80px;*/
+    min-width: 3px;
+    border-radius: 5px;
+    background-color: black;
+}
+
+#pulseaudio-slider highlight {
+    min-width: 3px;
+    /*border-radius: 5px;*/
+    background-color: green;
 }
 
 #custom-media {

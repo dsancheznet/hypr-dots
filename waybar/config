@@ -23,9 +23,10 @@
                     "temperature",
                     "backlight", 
                     "keyboard-state",  
+                    "hyprland/language",
                     "disk", 
                     "network", 
-                    "pulseaudio", 
+                    "pulseaudio",
                     "clock",
                     "custom/power"
     ],
@@ -33,11 +34,17 @@
    "keyboard-state": {
         "numlock": false,
         "capslock": true,
-        "format": "{icon}  {name}  ",
+        "format": "{name} {icon}",
         "format-icons": {
             "locked": "",
             "unlocked": ""
         }
+   },
+
+   "hyprland/language": {
+      "format": "{}  ",
+      "format-es": "🇪🇸",
+      "format-us": "🇺🇸",
    },
 
    "wlr/taskbar": {
@@ -47,12 +54,6 @@
         "tooltip-format": "{title}",
         "on-click": "activate",
         "on-click-middle": "close",
-   },
-
-   "hyprland/language": {
-      "format": "{}+",
-      "format-es": "🇪🇸",
-      "format-us": "🇺🇸",
    },
 
    "idle_inhibitor": {
@@ -119,7 +120,14 @@
             "car": "",
             "default": ["", "", ""]
         },
-        "on-click": "pavucontrol"
+        "on-click": "pactl set-sink-mute 0 toggle",
+        "on-click-right": "pavucontrol"
+   },
+
+   "pulseaudio/slider": {
+        "min": 0,
+        "max": 100,
+        "orientation": "vertical"
    },
 
    "custom/media": {

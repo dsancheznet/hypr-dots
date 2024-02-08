@@ -4,6 +4,8 @@
 # Written by D.Sánchez 
 # usage: install.sh [ -s, --sync | -i, --install ]
 
+CURRENT_USER=`whoami`
+
 VALID_ARGS=$(getopt -o isp --long install,sync,prepare -- "$@")
 if [[ $? -ne 0 ]]; then
     exit 1;
@@ -18,6 +20,9 @@ while [ : ]; do
         shift
         # Installing neovim conigurations
         git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
+        # Installing powerline
+        git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.config/powerlevel10k
+        echo 'source ~/.config/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
         # Installing waybar configurations
         rsync -avhr ./waybar ~/.config --progress
         # Installing hypr configurations
@@ -30,7 +35,7 @@ while [ : ]; do
         rsync -avhr ./fonts ~/.local/share --progress
         fc-cache -f -v
         # Installing system images
-        rsync -avhr ./System ~/Imágenes/System --progress
+        rsync -avhr ./System ~/Imágenes --progress
         exit 0
         ;;
     -s | --sync)
@@ -59,14 +64,14 @@ while [ : ]; do
     -p | --prepare)
         echo "This option is not working yet. Coming soon ;)"
 
-        echo "Installind 3rd party repos"
+        echo "Installing 3rd party repos"
         sudo zypper ar -f https://download.opensuse.org/repositories/home:/Dead_Mozay/openSUSE_Tumbleweed Dead_Mozay
         echo "Refreshing repos"
         sudo zypper refresh
         echo "Update all packets"
         sudo zypper update
         echo "Install neccessary hyprland packages"
-        sudo zypper install hyprland ulauncher neovim swayidle waybar swaylock swaylock-zsh-completion kitty kitty-shell-integration swaybg go gtk3-devel gtk-layer-shell-devel make mc eza duf 
+        sudo zypper install hyprland ulauncher neovim swayidle waybar swaylock swaylock-zsh-completion kitty kitty-shell-integration swaybg go gtk3-devel gtk-layer-shell-devel make mc eza duf zsh
         echo "Compile nwg-bar"
       	cd ~
       	git clone https://github.com/nwg-piotr/nwg-bar.git
@@ -80,6 +85,10 @@ while [ : ]; do
 
         flatpak install kodi
 
+        flatpak install jdownloader
+
+        sudo chsh -s /usr/bin/zsh $CURRENT_USER
+
         exit 0
 
         ;;
@@ -90,3 +99,11 @@ while [ : ]; do
 done
 echo "Hyprland installer for OpenSuSE v0.1 Written by D.Sánchez (c)2024 "
 echo "Usage:    install.sh [ -i,--install | -s,--sync | -p, --prepare ]"
+
+
+/*
+
+  Pick a nice Wallpaper from 
+  https://wallpaperswide.com/
+
+*/
