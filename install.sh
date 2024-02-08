@@ -17,17 +17,18 @@ while [ : ]; do
         echo "Installing dotfiles..."
         shift
         # Installing neovim conigurations
-        git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 && nvim
+        git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
         # Installing waybar configurations
-        rsync -avhr ./waybar ~/.config/waybar --progress
+        rsync -avhr ./waybar ~/.config --progress
         # Installing hypr configurations
-        rsync -avhr ./hypr ~/.config/hypr --progress
+        rsync -avhr ./hypr ~/.config --progress
         # Installing nwg-bar configurations
-        rsync -avhr ./nwg-bar ~/.config/nwg-bar --progress
+        rsync -avhr ./nwg-bar ~/.config --progress
         # Installing kitty configurations
-        rsync -avhr ./kitty ~/.config/kitty --progress
+        rsync -avhr ./kitty ~/.config --progress
         # Installing system fonts
-        rsync -avhr ./fonts ~/.local/share/fonts --progress
+        rsync -avhr ./fonts ~/.local/share --progress
+        fc-cache -f -v
         # Installing system images
         rsync -avhr ./System ~/Imágenes/System --progress
         exit 0
@@ -57,7 +58,6 @@ while [ : ]; do
         ;;
     -p | --prepare)
         echo "This option is not working yet. Coming soon ;)"
-        /*
 
         echo "Installind 3rd party repos"
         sudo zypper ar -f https://download.opensuse.org/repositories/home:/Dead_Mozay/openSUSE_Tumbleweed Dead_Mozay
@@ -65,11 +65,23 @@ while [ : ]; do
         sudo zypper refresh
         echo "Update all packets"
         sudo zypper update
-        echo "Install hyprland ulauncher"
-        sudo zypper install hyprland ulauncher 
+        echo "Install neccessary hyprland packages"
+        sudo zypper install hyprland ulauncher neovim swayidle waybar swaylock swaylock-zsh-completion kitty kitty-shell-integration swaybg go gtk3-devel gtk-layer-shell-devel make mc eza duf 
+        echo "Compile nwg-bar"
+      	cd ~
+      	git clone https://github.com/nwg-piotr/nwg-bar.git
+      	cd nwg-bar
+      	make get
+      	make build 
+      	sudo make install
+      	cd .. && rm -rf nwg-bar
 
-        */
+        flatpak install joplin
+
+        flatpak install kodi
+
         exit 0
+
         ;;
     --) shift; 
         break 
