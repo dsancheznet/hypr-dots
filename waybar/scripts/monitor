@@ -1,31 +1,42 @@
 #!/bin/env bash
 
+# Monitor control script written by D.Sánchez 2024
+# 
+# Usage: monitor [ toggle | on | off ]
+#   toggle  : toggles the monitor state. If it's on, it turns it off;
+#             if it's off, it turns it on.
+#   on      : turns the monitor on, independently from its actual state.
+#   off     : turns the monitor off, independently from its actual state.
+
+save_brt_off() {
+      BRIGHTNESS_VALUE=`brightnessctl get`
+      echo "$BRIGHTNESS_VALUE" >> /tmp/SAVED_BRIGHTNESS
+      hyprctl dispatch dpms off
+}
+
+get_brt_on() {
+      BRIGHTNESS_VALUE=`cat /tmp/SAVED_BRIGHTNESS`
+      hyprctl dispatch dpms on
+      brightnessctl set "$BRIGHTNESS_VALUE"
+}
+
 case "$1" in
 "toggle")
     DPMS_STATUS=`hyprctl monitors | grep "dpmsStatus" | cut -d":" -f2 | xargs`
   
     if [[ $DPMS_STATUS == "1" ]]; then
-      BRIGHTNESS_VALUE=`brightnessctl get`
-      echo "$BRIGHTNESS_VALUE" >> /tmp/SAVED_BRIGHTNESS
-      hyprctl dispatch dpms off
+      save_brt_off
     else
-      BRIGHTNESS_VALUE=`cat /tmp/SAVED_BRIGHTNESS`
-      hyprctl dispatch dpms on
-      brightnessctl set "$BRIGHTNESS_VALUE"
+      get_brt_on
     fi
   ;;
 "on")
-    BRIGHTNESS_VALUE=`cat /tmp/SAVED_BRIGHTNESS`
-    hyprctl dispatch dpms on
-    brightnessctl set "$BRIGHTNESS_VALUE"
+  get_brt_on
   ;;
 "off")
-    BRIGHTNESS_VALUE=`brightnessctl get`
-    hyprctl dispatch dpms off
-    echo "$BRIGHTNESS_VALUE" >> /tmp/SAVED_BRIGHTNESS
+  save_brt_off
   ;;
 *)
-  echo "Usage: monitor \[ toggle | on | off \]"
+  echo "Usage: monitor [ toggle | on | off ]"
   ;;
 esac
-
