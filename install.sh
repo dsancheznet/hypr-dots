@@ -36,6 +36,8 @@ while [ : ]; do
         fc-cache -f -v
         # Installing system images
         rsync -avhr ./System ~/Imágenes --progress
+        # Installing zsh configurations
+        rsync -avhr ./zsh-source-files ~/.config --progres
         exit 0
         ;;
     -s | --sync)
@@ -53,6 +55,8 @@ while [ : ]; do
         rsync -avhr ~/.local/share/fonts . --progress --delete
         # Copy images
         rsync -avhr ~/Imágenes/System . --progress --delete
+        # Copy all zsh configurations
+        rsync -avhr ~/.config/zsh-source-files . --progress --delete
         # Add all new or changed files
         git add .
         # Commit all changes
@@ -82,8 +86,6 @@ while [ : ]; do
       	cd .. && rm -rf nwg-bar
 
         flatpak install joplin
-
-        flatpak install kodi
 
         flatpak install jdownloader
 

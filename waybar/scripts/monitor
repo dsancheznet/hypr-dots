@@ -8,16 +8,23 @@
 #   on      : turns the monitor on, independently from its actual state.
 #   off     : turns the monitor off, independently from its actual state.
 
+#Set this to 1 if you are an a laptop
+SAVE_BRIGHTNESS=0
+
 save_brt_off() {
+    if [[ $SAVE_BRIGHTNESS == 1 ]]; then
       BRIGHTNESS_VALUE=`brightnessctl get`
       echo "$BRIGHTNESS_VALUE" >> /tmp/SAVED_BRIGHTNESS
-      hyprctl dispatch dpms off
+    fi
+    hyprctl dispatch dpms off
 }
 
 get_brt_on() {
+    if [[ $SAVE_BRIGHTNESS == 1 ]]; then
       BRIGHTNESS_VALUE=`cat /tmp/SAVED_BRIGHTNESS`
-      hyprctl dispatch dpms on
       brightnessctl set "$BRIGHTNESS_VALUE"
+    fi
+    hyprctl dispatch dpms on
 }
 
 case "$1" in

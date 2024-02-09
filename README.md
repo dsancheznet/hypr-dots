@@ -5,6 +5,14 @@ Current versions of the dot files installed on my desktop
 
 The following commands have to be executed from whithin the git directory itself.
 
+### Preparing the system
+
+To prepare the system, you may run
+
+`./install --prepare` or `./install -p`
+
+This step is optional and is only interesting if you hace a vanilla Tumbleweed system. In that case, all neccessary packes are being taken care of so you will be able to launch hyprland after installing the dot-files ( see below ).
+
 ### Recovering files 
 
 To sync files back from the repo 
