@@ -103,9 +103,5 @@ echo "Hyprland installer for OpenSuSE v0.1 Written by D.Sánchez (c)2024 "
 echo "Usage:    install.sh [ -i,--install | -s,--sync | -p, --prepare ]"
 
 
-/*
-
-  Pick a nice Wallpaper from 
-  https://wallpaperswide.com/
-
-*/
+#  Pick a nice Wallpaper from 
+#  https://wallpaperswide.com/
