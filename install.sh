@@ -71,7 +71,7 @@ while [ : ]; do
         echo "Update all packets"
         sudo zypper update
         echo "Install neccessary hyprland packages"
-        sudo zypper install hyprland ulauncher neovim swayidle waybar swaylock swaylock-zsh-completion kitty kitty-shell-integration swaybg go gtk3-devel gtk-layer-shell-devel make mc eza duf zsh
+        sudo zypper install hyprland ulauncher neovim swayidle waybar swaylock swaylock-zsh-completion kitty kitty-shell-integration swaybg go gtk3-devel gtk-layer-shell-devel make mc eza duf zsh gstreamer-1.20-plugin-openh264 libopenh264-7 mozilla-openh264
         echo "Compile nwg-bar"
       	cd ~
       	git clone https://github.com/nwg-piotr/nwg-bar.git
